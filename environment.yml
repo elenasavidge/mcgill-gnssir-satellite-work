@@ -1,0 +1,25 @@
+name: arctic-eo
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - numpy
+  - pandas
+  - matplotlib-base
+  - xarray
+  - netcdf4
+  - h5py
+  - h5netcdf
+  - scipy
+  - astropy          # Lomb-Scargle, used by the GNSS-IR notebook
+  - pillow
+  - pyproj
+  - proj-data          # keeps PROJ's database findable; avoids the proj_create error
+  - cartopy
+  - rasterio
+  - rioxarray
+  - jupyterlab
+  - ipykernel
+  - pip
+  - pip:
+      - earthaccess

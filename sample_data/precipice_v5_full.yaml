@@ -1,0 +1,70 @@
+# NOTE: published copy. basedir blanked; all processing parameters are exactly as run.
+# Identical to precipice_v5.yaml except for the date range: this one covers the whole
+# deployment, which is the run that produced spline_v5_sealevel.csv.
+# PRECIPICE GNSS-IR Configuration - V5 FULL RUN
+# Same parameters as V5, extended to full dataset (Aug 2024 - Oct 2025)
+# V5 params: azilims [180, 250], rhlims [9, 13], elvlims [5, 25]
+# Local processing (not AWS)
+aws_access: False
+basedir: "/path/to/your/PRECIPICE"
+dir_nmea: "raw"
+dir_snr: "processed/snr_v2"
+dir_arcs: "processed/arcs_v5"
+dir_spline: "processed/spline_v5"
+
+# NMEA file format: YYMMDD/HHMM.FIX
+nmeafilefmt: "%y%m%d/%H%M.FIX"
+nmeastep: 60
+
+# REQUIRED PARAMS
+site_name: "precipice"
+arcfilefmt: "precipice_l1_%y%m%d_24h.csv"
+splinecsvout: "precipice_sealevel_v5.csv"
+
+# FULL DATE RANGE: Aug 1, 2024 - Oct 27, 2025
+dt_start: "24-08-01 0000"
+dt_end: "25-10-27 0000"
+
+# site location (from NMEA data: ~76.42N, 82.90W)
+lla: [76.417, -82.896, 15.0]
+rh_datum: 0
+
+# antenna params (4 antennas: 0, 1, 2, 3)
+antennaids_str: ["0", "1", "2", "3"]
+antennaids_int: [0, 1, 2, 3]
+ahgt_dict:
+  0: 0.185
+  1: 0.185
+  2: 0.095
+  3: 0.095
+
+# gnssir params
+# V5: ocean-facing azimuths only, tight RH range
+azilims: [180, 250]
+elvlims: [5, 25]
+rhlims: [9, 13]
+
+# spline fitting parameters
+prenodes: 2
+postnodes: 2
+nodelen: 14400
+nodestep: 3600
+maxarcgaplim: 14400
+
+# relaxed QC to retain more arcs
+qcparams:
+  clrlim: 0
+  ptnlim: 0
+  rhlims: [9, 13]
+  meanrhdifflim: 10
+  splinedifflim: 1.0
+  maxerrlim: 1.0
+
+# output format
+splinecsvwlvlstr: "water_level_m"
+splinecsvdatestr: "datetime_utc"
+splinecsvdatefmt: "%Y-%m-%d %H:%M"
+splinecsverrstr: "error_m"
+
+# SNR file settings
+snrstep: 3600
